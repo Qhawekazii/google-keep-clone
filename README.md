@@ -2,6 +2,12 @@
 
 A Google Keep-inspired notes app built with plain HTML, CSS, and JavaScript.
 
+## Live Site
+
+After GitHub Pages finishes deploying, open:
+
+https://qhawekazii.github.io/google-keep-clone/
+
 ## Features
 
 - Keep-style top bar with logo, search, refresh, view toggle, and account button.
@@ -25,10 +31,11 @@ google-keep-clone/
 |-- index.html
 |-- css/
 |   `-- styles.css
-`-- js/
-    `-- app.js
+|-- js/
+|   `-- app.js
+`-- README.md
 ```
 
-## How to Run
+## How to Run Locally
 
 Open `index.html` in a web browser. No build step or server is required.
