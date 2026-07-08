@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Keep Clone</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="sidebar-collapsed">
+    <header class="top-app-bar">
+      <button class="icon-button menu-button" type="button" id="menu-toggle" aria-label="Expand menu" aria-expanded="false">
+        <span class="hamburger-icon" aria-hidden="true"></span>
+        <span class="tooltip">Main menu</span>
+      </button>
+
+      <a class="keep-brand" href="#notes-grid" aria-label="Keep home">
+        <span class="keep-logo" aria-hidden="true">
+          <span class="bulb-top"></span>
+          <span class="bulb-base"></span>
+        </span>
+        <span>Keep</span>
+      </a>
+
+      <label class="search-box" for="search-notes">
+        <span class="search-icon" aria-hidden="true"></span>
+        <input id="search-notes" type="search" placeholder="Search" autocomplete="off" />
+      </label>
+
+      <div class="top-actions" aria-label="Toolbar">
+        <button class="icon-button" type="button" id="refresh-button" aria-label="Refresh notes">
+          <span class="icon-refresh" aria-hidden="true"></span>
+          <span class="tooltip">Refresh</span>
+        </button>
+        <button class="icon-button" type="button" id="toggle-density" aria-label="Toggle list view">
+          <span class="icon-view" aria-hidden="true"></span>
+          <span class="tooltip">List view</span>
+        </button>
+        <button class="icon-button" type="button" aria-label="Settings">
+          <span class="icon-gear" aria-hidden="true"></span>
+          <span class="tooltip">Settings</span>
+        </button>
+        <button class="icon-button" type="button" id="theme-toggle" aria-label="Switch to light mode">
+          <span class="theme-icon icon-sun" aria-hidden="true"></span>
+          <span class="tooltip">Light mode</span>
+        </button>
+        <button class="icon-button apps-button" type="button" aria-label="Google apps">
+          <span class="apps-grid" aria-hidden="true"></span>
+          <span class="tooltip">Google apps</span>
+        </button>
+        <button class="avatar-button" type="button" aria-label="Account">S</button>
+      </div>
+    </header>
+
+    <div class="app-layout">
+      <aside class="side-nav" aria-label="Keep navigation">
+        <button class="nav-item is-active" type="button" data-view="active">
+          <span class="nav-icon icon-bulb" aria-hidden="true"></span>
+          <span class="nav-label">Notes</span>
+        </button>
+        <button class="nav-item" type="button" data-view="reminders">
+          <span class="nav-icon icon-bell" aria-hidden="true"></span>
+          <span class="nav-label">Reminders</span>
+        </button>
+        <button class="nav-item" type="button" data-view="labels">
+          <span class="nav-icon icon-pencil" aria-hidden="true"></span>
+          <span class="nav-label">Edit labels</span>
+        </button>
+        <button class="nav-item" type="button" data-view="archived">
+          <span class="nav-icon icon-archive" aria-hidden="true"></span>
+          <span class="nav-label">Archive</span>
+        </button>
+        <button class="nav-item" type="button" data-view="trash">
+          <span class="nav-icon icon-trash" aria-hidden="true"></span>
+          <span class="nav-label">Bin</span>
+        </button>
+        <a class="license-link" href="#notes-grid">Open-source licences</a>
+      </aside>
+
+      <main class="content-area">
+        <section class="composer-section" aria-labelledby="composer-title">
+          <form class="note-form" id="note-form">
+            <h1 id="composer-title" class="sr-only">Create a note</h1>
+            <input class="title-input" id="note-title" name="title" type="text" maxlength="80" placeholder="Title" autocomplete="off" />
+            <textarea class="body-input" id="note-body" name="body" rows="1" maxlength="600" placeholder="Take a note..." required></textarea>
+
+            <div class="quick-tools" aria-hidden="true">
+              <span class="icon-check"></span>
+              <span class="icon-pencil small-pencil"></span>
+              <span class="icon-image"></span>
+            </div>
+
+            <div class="composer-tools">
+              <fieldset class="color-field" aria-label="Note color">
+                <label class="color-choice">
+                  <input type="radio" name="color" value="default" checked />
+                  <span class="swatch swatch-default" title="Default"></span>
+                </label>
+                <label class="color-choice">
+                  <input type="radio" name="color" value="brown" />
+                  <span class="swatch swatch-brown" title="Brown"></span>
+                </label>
+                <label class="color-choice">
+                  <input type="radio" name="color" value="blue" />
+                  <span class="swatch swatch-blue" title="Blue"></span>
+                </label>
+                <label class="color-choice">
+                  <input type="radio" name="color" value="green" />
+                  <span class="swatch swatch-green" title="Green"></span>
+                </label>
+              </fieldset>
+
+              <div class="form-actions">
+                <button class="text-button" type="reset">Close</button>
+                <button class="text-button" type="submit">Add</button>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <section class="notes-section" aria-labelledby="notes-heading">
+          <h2 id="notes-heading" class="section-title">Pinned</h2>
+          <div class="notes-root" id="notes-grid" aria-live="polite"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <span class="empty-icon icon-bulb" aria-hidden="true"></span>
+            <h3>No notes yet</h3>
+            <p>Notes you add appear here.</p>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="note-modal" hidden>
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="icon-button close-modal" type="button" id="close-note-modal" aria-label="Close note details">
+          <span aria-hidden="true">&times;</span>
+          <span class="tooltip">Close</span>
+        </button>
+        <h2 id="modal-title">Note details</h2>
+        <p id="modal-date" class="modal-date"></p>
+        <p id="modal-body" class="modal-body"></p>
+      </section>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
